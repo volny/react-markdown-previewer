@@ -33,7 +33,7 @@ export default class App extends Component {
         </div>
 
         <div className="App-container">
-          <Input updateInput={this.handleInputUpdate} />
+          <Input updateInput={this.handleInputUpdate.bind(this)} />
           <Output text={this.convert(this.state.value)} />
         </div>
       </div>
