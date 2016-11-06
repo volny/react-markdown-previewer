@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import MarkdownInput from './MarkdownInput';
+import Output from './Output';
 
-import marked from 'marked';
-
-class App extends Component {
-  convert() {
-    const raw = marked('This *is* __Markdown__.', { sanitze: true, gfm: true })
-    return { __html: raw }
-  }
-
+export default class App extends Component {
   render() {
     return (
       <div className="App">
@@ -17,12 +12,14 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Markdown Previewer</h2>
         </div>
-        <p className="App-intro">
-          <div dangerouslySetInnerHTML={this.convert()} />
-        </p>
+
+        <div className="App-container">
+          <MarkdownInput />
+          <Output />
+        </div>
+
       </div>
     );
   }
 }
 
-export default App;
