@@ -5,6 +5,19 @@ import MarkdownInput from './MarkdownInput';
 import Output from './Output';
 
 export default class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      value: '*markdown* all the way **up**'
+    }
+  }
+
+  handleInputUpdate(currentValue) {
+    this.setState({
+      value: currentValue
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -14,10 +27,9 @@ export default class App extends Component {
         </div>
 
         <div className="App-container">
-          <MarkdownInput />
-          <Output />
+          <MarkdownInput updateInput={this.handleInputUpdate} />
+          <Output value={this.state.value} />
         </div>
-
       </div>
     );
   }
