@@ -4,22 +4,24 @@ import './App.css';
 import Input from './Input';
 import Output from './Output';
 import marked from 'marked';
+import placeholder from './Placeholder';
 
 export default class App extends Component {
   constructor() {
     super()
     this.state = {
-      value: '# It\'s *markdown* all the way **up**'
+      value: placeholder
     }
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  handleInputUpdate(currentValue) {
+  handleChange(currentValue) {
     this.setState({
       value: currentValue
     })
   }
 
-  convert(text) {
+  parse(text) {
     const raw = marked(text, { sanitze: true, gfm: true })
     return { __html: raw }
   }
@@ -33,8 +35,8 @@ export default class App extends Component {
         </div>
 
         <div className="App-container">
-          <Input updateInput={this.handleInputUpdate.bind(this)} />
-          <Output text={this.convert(this.state.value)} />
+          <Input updateInput={this.handleChange} />
+          <Output text={this.parse(this.state.value)} />
         </div>
       </div>
     );

@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
+import placeholder from './Placeholder';
 
 export default class Input extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: placeholder
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
+
   handleChange(event) {
-    this.props.updateInput(event.target.value)
+    const newValue = event.target.value
+    this.setState({value: newValue})
+    this.props.updateInput(newValue)
   }
 
   render() {
@@ -11,7 +22,8 @@ export default class Input extends Component {
         className="textbox InputArea"
         name="input"
         ref="input"
-        onChange={this.handleChange.bind(this)}
+        value={this.state.value}
+        onChange={this.handleChange}
       />
     );
   }
