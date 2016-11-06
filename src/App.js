@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import MarkdownInput from './MarkdownInput';
+import Input from './Input';
 import Output from './Output';
+import marked from 'marked';
 
 export default class App extends Component {
   constructor() {
     super()
     this.state = {
-      value: '*markdown* all the way **up**'
+      value: '# It\'s *markdown* all the way **up**'
     }
   }
 
@@ -16,6 +17,11 @@ export default class App extends Component {
     this.setState({
       value: currentValue
     })
+  }
+
+  convert(text) {
+    const raw = marked(text, { sanitze: true, gfm: true })
+    return { __html: raw }
   }
 
   render() {
@@ -27,8 +33,8 @@ export default class App extends Component {
         </div>
 
         <div className="App-container">
-          <MarkdownInput updateInput={this.handleInputUpdate} />
-          <Output value={this.state.value} />
+          <Input updateInput={this.handleInputUpdate} />
+          <Output text={this.convert(this.state.value)} />
         </div>
       </div>
     );
